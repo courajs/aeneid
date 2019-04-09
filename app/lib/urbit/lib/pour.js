@@ -14,7 +14,7 @@ const patpStrToArr = p => p.replace(/[\^~-]/g,'').match(/.{1,3}/g)
 
 
 // generate a sigil
-const _pour = ({ patp, renderer, sylgraph, size, colorway, symbols, margin, ignoreColorway }) => {
+const _pour = ({ patp, renderer, symref, sylgraph, size, colorway, symbols, margin, ignoreColorway }) => {
 
   // if (isUndefined(renderer.svg)) throw new Error('Your renderer must have a `svg` method for pour to call.')
 
@@ -22,10 +22,14 @@ const _pour = ({ patp, renderer, sylgraph, size, colorway, symbols, margin, igno
   // the array.
   patp = isString(patp) ? patpStrToArr(patp) : patp;
 
-  // get svg objects from sylgraph. If there is a symbols argument in the config,
-  // render than array of symbols. This works well for rendering lists of svg
-  // pojos for development.
-  symbols = !isUndefined(symbols) ? symbols : lookup(patp, sylgraph);
+  if (symref) {
+    symbols = [symFromRef(symref, sylgraph)];
+  } else {
+    // get svg objects from sylgraph. If there is a symbols argument in the config,
+    // render than array of symbols. This works well for rendering lists of svg
+    // pojos for development.
+    symbols = !isUndefined(symbols) ? symbols : lookup(patp, sylgraph);
+  }
 
   const layout = grid({
     length: symbols.length,
@@ -51,6 +55,17 @@ const _pour = ({ patp, renderer, sylgraph, size, colorway, symbols, margin, igno
 };
 
 
+export const symFromRef = (symRef, sylgraph) => {
+  return {
+    attr: {},
+    meta: {},
+    tag: 'g',
+    children: symRef.split(':').map(ref => {
+      const elem = sylgraph.symbols[ref];
+      return isUndefined(elem) ? DEFAULT_ELEM : elem;
+    }),
+  };
+}
 
 
 const lookup = (patp, sylgraph) => {
@@ -156,9 +171,9 @@ const DEFAULT_SYMBOL = {
 
 // TODO revert this once graph is proven
 // wrap _pour with sylgraph
-const pour = ({ patp, renderer, size, sylgraph, colorway, symbols, margin, ignoreColorway }) => {
+const pour = ({ patp, renderer, size, symref, sylgraph, colorway, symbols, margin, ignoreColorway }) => {
   sylgraph = isUndefined(sylgraph) ? sylgraphjson : sylgraph
-  return _pour({ patp, sylgraph, renderer, size, colorway, symbols, margin, ignoreColorway });
+  return _pour({ patp, symref, sylgraph, renderer, size, colorway, symbols, margin, ignoreColorway });
 };
 
 const grid = ({ length, margin, size }) => {

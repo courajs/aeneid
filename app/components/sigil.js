@@ -10,8 +10,14 @@ export default class Sigil extends Component {
   }
 
   get svg() {
+    let content;
+    if (this.args.p) {
+      content = {patp: this.args.p};
+    } else if (this.args.ref) {
+      content = {symref: this.args.ref};
+    }
     return pour({
-      patp: this.p,
+      ...content,
       renderer: SVGComponents,
       size: 256,
     });
