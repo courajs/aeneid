@@ -14,7 +14,7 @@ const patpStrToArr = p => p.replace(/[\^~-]/g,'').match(/.{1,3}/g)
 
 
 // generate a sigil
-const _pour = ({ patp, renderer, symref, sylgraph, size, colorway, symbols, margin, ignoreColorway }) => {
+const _pour = ({ patp, renderer, symrefs, sylgraph, size, colorway, symbols, margin, ignoreColorway }) => {
 
   // if (isUndefined(renderer.svg)) throw new Error('Your renderer must have a `svg` method for pour to call.')
 
@@ -22,8 +22,8 @@ const _pour = ({ patp, renderer, symref, sylgraph, size, colorway, symbols, marg
   // the array.
   patp = isString(patp) ? patpStrToArr(patp) : patp;
 
-  if (symref) {
-    symbols = [symFromRef(symref, sylgraph)];
+  if (symrefs) {
+    symbols = symrefs.map(r => symFromRef(r, sylgraph));
   } else {
     // get svg objects from sylgraph. If there is a symbols argument in the config,
     // render than array of symbols. This works well for rendering lists of svg
@@ -171,9 +171,9 @@ const DEFAULT_SYMBOL = {
 
 // TODO revert this once graph is proven
 // wrap _pour with sylgraph
-const pour = ({ patp, renderer, size, symref, sylgraph, colorway, symbols, margin, ignoreColorway }) => {
+const pour = ({ patp, renderer, size, symrefs, sylgraph, colorway, symbols, margin, ignoreColorway }) => {
   sylgraph = isUndefined(sylgraph) ? sylgraphjson : sylgraph
-  return _pour({ patp, symref, sylgraph, renderer, size, colorway, symbols, margin, ignoreColorway });
+  return _pour({ patp, symrefs, sylgraph, renderer, size, colorway, symbols, margin, ignoreColorway });
 };
 
 const grid = ({ length, margin, size }) => {

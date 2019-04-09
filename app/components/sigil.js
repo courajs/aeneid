@@ -13,13 +13,24 @@ export default class Sigil extends Component {
     let content;
     if (this.args.p) {
       content = {patp: this.args.p};
+    } else if (this.args.refs) {
+      content = {symrefs: this.args.refs};
     } else if (this.args.ref) {
-      content = {symref: this.args.ref};
+      content = {symrefs: [this.args.ref]};
+    } else if (this.args.val && this.args.val[0] === '~') {
+      content = {patp: this.args.val};
+    } else if (this.args.val) {
+      content = {symrefs: this.args.val.split(',')};
+    } else {
+      content = {patp: "~jkl"};
     }
-    return pour({
-      ...content,
-      renderer: SVGComponents,
-      size: 256,
-    });
+    try {
+      return pour({
+        ...content,
+        renderer: SVGComponents,
+        size: 256,
+      });
+    } catch {
+    }
   }
 }
