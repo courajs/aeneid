@@ -18,9 +18,9 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.2",
     "@ember/optional-features": "^0.7.0",
     "@glimmer/component": "^0.14.0-alpha.3",
+    "babel-eslint": "^8.0.2",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.2.20",
     "ember-cli": "github:ember-cli/ember-cli#b741f7675d3a55e94e474796bc3c6f66ac7aabac",
@@ -44,7 +44,10 @@
     "eslint-plugin-ember": "^6.0.1",
     "eslint-plugin-node": "^8.0.1",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.8.0"
+    "lodash": "^4.17.11",
+    "qunit-dom": "^0.8.0",
+    "transformation-matrix": "^1.15.3",
+    "urbit-ob": "^4.0.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
