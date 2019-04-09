@@ -1,0 +1,44 @@
+import Controller from '@ember/controller';
+
+const pre = `
+dozmarbinwansamlitsighidfidlissogdirwacsabwissib\
+rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
+holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
+losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
+rilnardapmolsanlocnovsitnidtipsicropwitnatpanmin\
+ritpodmottamtolsavposnapnopsomfinfonbanmorworsip\
+ronnorbotwicsocwatdolmagpicdavbidbaltimtasmallig\
+sivtagpadsaldivdactansidfabtarmonranniswolmispal\
+lasdismaprabtobrollatlonnodnavfignomnibpagsopral\
+bilhaddocridmocpacravripfaltodtiltinhapmicfanpat\
+taclabmogsimsonpinlomrictapfirhasbosbatpochactid\
+havsaplindibhosdabbitbarracparloddosbortochilmac\
+tomdigfilfasmithobharmighinradmashalraglagfadtop\
+mophabnilnosmilfopfamdatnoldinhatnacrisfotribhoc\
+nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
+laptalpitnambonrostonfodponsovnocsorlavmatmipfip\
+`
+
+const suf = `
+zodnecbudwessevpersutletfulpensytdurwepserwylsun\
+rypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnex\
+lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
+pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
+rysrebdennutsubpetrulsynregtydsupsemwynrecmegnet\
+secmulnymtevwebsummutnyxrextebfushepbenmuswyxsym\
+selrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpel\
+syptermebsetdutdegtexsurfeltudnuxruxrenwytnubmed\
+lytdusnebrumtynseglyxpunresredfunrevrefmectedrus\
+bexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermer\
+tenlusnussyltecmexpubrymtucfyllepdebbermughuttun\
+bylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmyl\
+wedducfurfexnulluclennerlexrupnedlecrydlydfenwel\
+nydhusrelrudneshesfetdesretdunlernyrsebhulryllud\
+remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
+lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes\
+`
+
+export default class extends Controller {
+  pres = pre.match(/.{3}/g);
+  sufs = suf.match(/.{3}/g);
+}

@@ -1,5 +1,18 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<Sigil @p="~zod" />
-{{!-- Feel free to remove this! --}}
+<h1>Favs</h1>
+<Sigil @p="~wer" />
+<Sigil @p="~sim" />
+<Sigil @p="~hob" />
+<Sigil @p="~mol" />
+<Sigil @p="~nus" />
+
+<h1>Prefixes</h1>
+{{#each pres as |pre|}}
+  <Sigil @p={{concat "~" pre}} />
+{{/each}}
+
+<h1>Suffixes</h1>
+{{#each sufs as |suf|}}
+  <Sigil @p={{concat "~" suf}} />
+{{/each}}
 
 {{outlet}}
