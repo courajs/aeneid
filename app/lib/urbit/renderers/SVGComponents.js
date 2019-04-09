@@ -8,7 +8,7 @@ const appendChildNodes = (p, svgNode) => {
 };
 
 const createChildNode = (p, nodeName) => {
-  let node = document.createElementNS(nodeName);
+  let node = document.createElementNS('http://www.w3.org/2000/svg', nodeName);
   Object.keys(p.attr).forEach(k => { 
     node.setAttribute(k, p.attr[k]);
   });
