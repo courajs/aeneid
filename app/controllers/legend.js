@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import graph from 'aeneid/lib/urbit/lib/sylgraph';
+import graph from 'aeneid/lib/urbit/sigil/lib/sylgraph';
 
 let groups = {};
 for (let [syl,ref] of Object.entries(graph.mapping)) {

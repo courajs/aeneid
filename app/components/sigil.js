@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-import {pour, SVGComponents} from 'aeneid/lib/urbit/index';
+import {pour, SVGComponents} from 'aeneid/lib/urbit/sigil/index';
 
 export default class Sigil extends Component {
   get p() {

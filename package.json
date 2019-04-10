@@ -50,7 +50,8 @@
     "lodash": "^4.17.11",
     "qunit-dom": "^0.8.0",
     "transformation-matrix": "^1.15.3",
-    "urbit-ob": "^4.0.0"
+    "urbit-ob": "^4.0.0",
+    "wu": "^2.1.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"

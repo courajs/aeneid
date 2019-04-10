@@ -1,43 +1,7 @@
-<ScratchSigil />
+<label>Star: {{input value=this.prefix}}</label>
+<BaseShapePicker @onchange={{action this.choseShape}} />
 
-<Sigil @refs={{array  "7a365cc2" "7a365cc2" "7a365cc2" "7a365cc2"}} />
-<Sigil @ref="fbf3a00b" />
-<Sigil @ref="7a365cc2" />
-<Sigil @ref="d93ccb2" />
-<Sigil @ref="b0ac0b82" />
-<Sigil @ref="28b33136" />
-<Sigil @ref="19634ad2" />
-<Sigil @ref="a5c31631" />
-<Sigil @ref="6cb74008" />
-<Sigil @ref="e3621cc2" />
-<Sigil @ref="82ff5e94" />
-<Sigil @ref="362aae07" />
-<Sigil @ref="de3bc3d1" />
-
-<h1>Base</h1>
-<Sigil @p="~per" />
-<Sigil @p="~dur" />
-<Sigil @p="~lug" />
-<Sigil @p="~pon" />
-<Sigil @p="~ryg" />
-<Sigil @p="~wan" />
-<Sigil @p="~wyc" />
-<Sigil @p="~zod" />
-
-<h1>Favs</h1>
-<Sigil @p="~wer" />
-<Sigil @p="~sim" />
-<Sigil @p="~hob" />
-<Sigil @p="~mol" />
-<Sigil @p="~nus" />
-
-<h1>Prefixes</h1>
-{{#each pres as |pre|}}
-  <Sigil @p={{concat "~" pre}} />
+{{#each this.planets as |patp|}}
+  <p>{{patp}}</p>
+  <Sigil @p={{patp}}/>
 {{/each}}
-
-<h1>Suffixes</h1>
-{{#each sufs as |suf|}}
-  <Sigil @p={{concat "~" suf}} />
-{{/each}}
-
