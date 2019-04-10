@@ -1,1 +1,5 @@
-<BaseShapePicker />
+{{input value=this.input}}
+
+{{#each this.planets as |p|}}
+  <Sigil @p={{p}}/>
+{{/each}}
