@@ -1,0 +1,8 @@
+{{#each this.groups as |g|}}
+  <details>
+    <summary><Sigil @ref={{g.base}} @size={{64}}/></summary>
+    {{#each g.forms as |f|}}
+      <Sigil @ref={{f.ref}} @size={{64}}/>
+    {{/each}}
+  </details>
+{{/each}}

@@ -28,7 +28,7 @@ export default class Sigil extends Component {
       return pour({
         ...content,
         renderer: SVGComponents,
-        size: 256,
+        size: this.args.size || 256,
       });
     } catch {
     }
