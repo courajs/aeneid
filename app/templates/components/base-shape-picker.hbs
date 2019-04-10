@@ -1,0 +1,13 @@
+<style>
+.sigil-shape-picker > svg > g:hover [fill="#fff"] {
+  fill: #ec008c;
+}
+</style>
+
+<div
+  class="sigil-shape-picker"
+  {{did-insert (action this.thing)}}
+  {{did-update (action this.thing) this.svg}}
+>
+{{this.svg}}
+</div>
