@@ -1,8 +1,7 @@
-<Sigil @ref="0" @size={{64}}/>
-{{#each this.groups as |g|}}
+{{#each this.shapes as |s|}}
   <details>
-    <summary><Sigil @ref={{g.base}} @size={{64}}/></summary>
-    {{#each g.forms as |f|}}
+    <summary><Sigil @ref={{s.ref}} @size={{64}}/></summary>
+    {{#each s.forms as |f|}}
       <Sigil @ref={{f.ref}} @size={{64}}/>
     {{/each}}
   </details>
