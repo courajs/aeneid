@@ -31,19 +31,24 @@
   }
 </style>
 <table class="legend-shape-table">
-{{#each this.pairs as |pair|}}
-  {{#let (get pair 0) (get pair 1) as |pre suf|}}
-    <tr>
-      <td>{{or pre.hex suf.hex}}, {{or pre.value suf.value}}</td>
-      <td class="symbol">{{#if pre}}
-        <Sigil @ref={{pre.ref}} @size={{64}}/>
-        <p>{{pre.syl}}</p>
-      {{/if}}</td>
-      <td class="symbol">{{#if suf}}
-        <Sigil @ref={{suf.ref}} @size={{64}}/>
-        <p>{{suf.syl}}</p>
-      {{/if}}</td>
-    </tr>
-  {{/let}}
-{{/each}}
+  <tr>
+    <th>Hex, Dec</th>
+    <th>Prefix</th>
+    <th>Suffix</th>
+  </tr>
+  {{#each this.pairs as |pair|}}
+    {{#let (get pair 0) (get pair 1) as |pre suf|}}
+      <tr>
+        <td>{{or pre.hex suf.hex}}, {{or pre.value suf.value}}</td>
+        <td class="symbol">{{#if pre}}
+          <Sigil @ref={{pre.ref}} @size={{64}}/>
+          <p>{{pre.syl}}</p>
+        {{/if}}</td>
+        <td class="symbol">{{#if suf}}
+          <Sigil @ref={{suf.ref}} @size={{64}}/>
+          <p>{{suf.syl}}</p>
+        {{/if}}</td>
+      </tr>
+    {{/let}}
+  {{/each}}
 </table>
