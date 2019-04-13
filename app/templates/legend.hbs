@@ -1,3 +1,19 @@
+<h1>Base shapes</h1>
+
+<style>
+  #base-shape-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 64px);
+    grid-template-rows:    repeat(2, 64px);
+    gap: 4px;
+  }
+</style>
+<div id="base-shape-grid">
+  {{#each this.shapes as |shape idx|}}
+    <Sigil @ref={{shape.ref}} @size={{64}}/>
+  {{/each}}
+</div>
+
 {{#each this.shapes as |s|}}
   <details>
     <summary><Sigil @ref={{s.ref}} @size={{64}}/></summary>

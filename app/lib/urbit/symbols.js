@@ -72,5 +72,7 @@ for (let i = 0; i <= 0xff; i++) {
 
 export default {
   symbols,
+  prefixes: symbols.filter(s=>s.prefix),
+  suffixes: symbols.filter(s=>s.suffix),
   shapes: Object.values(bases),
 };
