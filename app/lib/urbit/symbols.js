@@ -49,6 +49,7 @@ for (let i = 0; i <= 0xff; i++) {
   let base = ref.split(':')[0];
   let s = {
     value: i,
+    hex: '0x'+i.toString(16),
     prefix: true,
     syl, ref, base,
   };
@@ -62,6 +63,7 @@ for (let i = 0; i <= 0xff; i++) {
   base = ref.split(':')[0];
   s = {
     value: i,
+    hex: '0x'+i.toString(16),
     suffix: true,
     syl, ref, base,
   };
@@ -71,7 +73,7 @@ for (let i = 0; i <= 0xff; i++) {
 }
 
 export default {
-  symbols,
+  forms: symbols,
   prefixes: symbols.filter(s=>s.prefix),
   suffixes: symbols.filter(s=>s.suffix),
   shapes: Object.values(bases),

@@ -1,3 +1,10 @@
+<label>Render a point: {{input placeholder="~zod, 0, 0x0" value=this.manualRender}}</label>
+{{#if renderP}}
+  <div>
+    <Sigil @p={{renderP}}/>
+  </div>
+{{/if}}
+
 <h1>Base shapes</h1>
 
 <style>
@@ -10,15 +17,33 @@
 </style>
 <div id="base-shape-grid">
   {{#each this.shapes as |shape idx|}}
-    <Sigil @ref={{shape.ref}} @size={{64}}/>
+    <span onclick={{action this.toggleShapeFilter shape.ref}}>
+      <Sigil @ref={{shape.ref}} @size={{64}}/>
+    </span>
   {{/each}}
 </div>
 
-{{#each this.shapes as |s|}}
-  <details>
-    <summary><Sigil @ref={{s.ref}} @size={{64}}/></summary>
-    {{#each s.forms as |f|}}
-      <Sigil @ref={{f.ref}} @size={{64}}/>
-    {{/each}}
-  </details>
+<h1>All shapes</h1>
+
+<style>
+  .legend-shape-table td.symbol {
+    width: 64px;
+  }
+</style>
+<table class="legend-shape-table">
+{{#each this.pairs as |pair|}}
+  {{#let (get pair 0) (get pair 1) as |pre suf|}}
+    <tr>
+      <td>{{or pre.hex suf.hex}}, {{or pre.value suf.value}}</td>
+      <td class="symbol">{{#if pre}}
+        <Sigil @ref={{pre.ref}} @size={{64}}/>
+        <p>{{pre.syl}}</p>
+      {{/if}}</td>
+      <td class="symbol">{{#if suf}}
+        <Sigil @ref={{suf.ref}} @size={{64}}/>
+        <p>{{suf.syl}}</p>
+      {{/if}}</td>
+    </tr>
+  {{/let}}
 {{/each}}
+</table>
