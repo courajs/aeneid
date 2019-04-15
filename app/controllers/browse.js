@@ -4,9 +4,10 @@ import {action} from '@ember/object';
 import wu from 'wu';
 window.wu = wu;
 
-import {planetsForStar, hasBaseShape} from 'aeneid/lib/urbit/ships';
-
-window.pred = hasBaseShape(["362aae07", "de3bc3d1", "362aae07", "362aae07"]);
+import * as ob from 'urbit-ob';
+import {isValidPatp, patp, patp2dec} from 'urbit-ob';
+import {allPlanets, planetsForPrefix, hasBaseShape} from 'aeneid/lib/urbit/ships';
+window.ob = ob;
 
 export default class extends Controller {
   // pres = pre.match(/.{3}/g);
@@ -18,62 +19,29 @@ export default class extends Controller {
 
   @tracked prefix = '~fiprun';
   @tracked baseRefs = ['','','',''];
-
-  get planets() {
-    let ary = wu(planetsForStar(this.prefix))
-      .filter(hasBaseShape(this.baseRefs))
-      .toArray();
-
-    // debugger;
-    return ary;
-  }
+  @tracked results;
 
   @action
-  choseShape(baseRefs) {
-    console.log(baseRefs);
-    this.baseRefs = baseRefs;
+  search(refs) {
+    this.baseRefs = refs;
+    let planets;
+    if (isValidPatp(this.prefix)) {
+      planets = wu(planetsForPrefix(parseInt(patp2dec(this.prefix))));
+    } else {
+      planets = wu(allPlanets());
+    }
+    let pred = hasBaseShape(this.baseRefs);
+      window.pred = pred;
+    planets = planets.filter(pred);
+
+    let results = [];
+    this.results = results;
+
+    planets.asyncEach((p) => {
+      if (this.results === results) {
+        results.push(patp(p));
+        this.results = this.results;
+      }
+    }, 15, 0);
   }
 }
-
-
-
-
-/*
-const pre = `
-dozmarbinwansamlitsighidfidlissogdirwacsabwissib\
-rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
-holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
-losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
-rilnardapmolsanlocnovsitnidtipsicropwitnatpanmin\
-ritpodmottamtolsavposnapnopsomfinfonbanmorworsip\
-ronnorbotwicsocwatdolmagpicdavbidbaltimtasmallig\
-sivtagpadsaldivdactansidfabtarmonranniswolmispal\
-lasdismaprabtobrollatlonnodnavfignomnibpagsopral\
-bilhaddocridmocpacravripfaltodtiltinhapmicfanpat\
-taclabmogsimsonpinlomrictapfirhasbosbatpochactid\
-havsaplindibhosdabbitbarracparloddosbortochilmac\
-tomdigfilfasmithobharmighinradmashalraglagfadtop\
-mophabnilnosmilfopfamdatnoldinhatnacrisfotribhoc\
-nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
-laptalpitnambonrostonfodponsovnocsorlavmatmipfip\
-`
-
-const suf = `
-zodnecbudwessevpersutletfulpensytdurwepserwylsun\
-rypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnex\
-lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
-pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
-rysrebdennutsubpetrulsynregtydsupsemwynrecmegnet\
-secmulnymtevwebsummutnyxrextebfushepbenmuswyxsym\
-selrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpel\
-syptermebsetdutdegtexsurfeltudnuxruxrenwytnubmed\
-lytdusnebrumtynseglyxpunresredfunrevrefmectedrus\
-bexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermer\
-tenlusnussyltecmexpubrymtucfyllepdebbermughuttun\
-bylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmyl\
-wedducfurfexnulluclennerlexrupnedlecrydlydfenwel\
-nydhusrelrudneshesfetdesretdunlernyrsebhulryllud\
-remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
-lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes\
-`
-*/

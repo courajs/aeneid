@@ -1,23 +1,29 @@
-import {patp2hex, hex2patp} from 'urbit-ob';
-import graph from 'aeneid/lib/urbit/sigil/lib/sylgraph';
+import {clan, patp, patp2dec} from 'urbit-ob';
+import symbols from 'aeneid/lib/urbit/symbols';
 
-window.p2h = patp2hex;
-window.h2p = hex2patp;
 
-window.sylgraph = graph;
+export function *planetsForPrefix(parent) {
+  if (parent <= 0xff) {          // galaxy
+    for (let star=1; star <= 0xff; star++) {
+      for (let plan=1; plan <= 0xffff; plan++) {
+        yield plan * (1<<16) + (star<<8) + parent;
+      }
+    }
+  } else if (parent <= 0xffff) {  // star
+    // 65k planets per star, skip the star itself
+    for(let plan = 1; plan <= 0xffff; plan++) {
+      yield plan* (1<<16)+parent;
+    }
+  } else {
+    throw new Error();
+  }
+}
 
-let digits = '0123456789abcdef'.split('');
-
-export function *planetsForStar(star) {
-  let base = patp2hex(star);
-  for (let a=0; a<digits.length;a++) {
-    for (let b=0; b<digits.length;b++) {
-      for (let c=0; c<digits.length;c++) {
-        for (let d=0; d<digits.length;d++) {
-          let high = [a,b,c,d].map(i=>digits[i]).join('');
-          if (high === '0000') { continue; }
-          yield hex2patp(high + base);
-        }
+export function *allPlanets() {
+  for (let gax=0; gax <= 0xff; gax++) {
+    for (let star=1; star <= 0xff; star++) {
+      for (let plan=1; plan <= 0xffff; plan++) {
+        yield plan*(1<<16) + (star<<8) + gax;
       }
     }
   }
@@ -25,14 +31,18 @@ export function *planetsForStar(star) {
 
 const getSyls = /~(.{3})(.{3})-(.{3})(.{3})/;
 export function hasBaseShape(baseRefs) {
-
-  return function(planet) {
-    let [,a,b,c,d] = planet.match(getSyls);
-    let bases = [a,b,c,d].map(s=>graph.mapping[s].split(':')[0]);
-    for(let i=0;i<4;i++) {
-      if (bases[i] !== baseRefs[i]) { return false; }
+  let syllables = baseRefs.map((ref, i) => {
+    if (i % 2) {
+      return symbols.suffixes.filter(f => f.base === ref).map(f=>f.syl);
+    } else {
+      return symbols.prefixes.filter(f => f.base === ref).map(f=>f.syl);
     }
+  });
+  window.syllables = syllables;
+
+  return function(point) {
+    let p = patp(point);
     // debugger;
-    return true;
+    return p.match(getSyls).slice(1).every((syl, i) => syllables[i].includes(syl));
   }
 }

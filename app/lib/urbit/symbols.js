@@ -72,9 +72,13 @@ for (let i = 0; i <= 0xff; i++) {
   bases[base].forms.push(s);
 }
 
-export default {
+let obj = {
   forms: symbols,
   prefixes: symbols.filter(s=>s.prefix),
   suffixes: symbols.filter(s=>s.suffix),
   shapes: Object.values(bases),
+  byBase: bases,
 };
+
+window.symbols = obj;
+export default obj
