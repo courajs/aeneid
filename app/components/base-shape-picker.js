@@ -6,7 +6,7 @@ import {pour, SVGComponents} from 'aeneid/lib/urbit/sigil/index';
 const shapes = ["d93ccb2", "28b33136", "362aae07", "de3bc3d1", "6cb74008", "19634ad2", "82ff5e94", "b0ac0b82", "a5c31631", "fbf3a00b", "e3621cc2", "7a365cc2"];
 
 export default class extends Component {
-  @tracked symbs = [7,2,6,0];
+  @tracked symbs = [0,0,0,0];
 
   get refs() {
     let refs = [
